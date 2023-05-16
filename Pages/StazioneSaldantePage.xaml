@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="GG40.Pages.StazioneSaldantePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GG40.Pages"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Grid Margin="10, 10, 10, 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Style="{StaticResource PageTitle}" Content="ISOLA DI SALDATURA OPM CNROBOT" />
+
+                    <Button Grid.Column="1" Command="{Binding RefreshCommand}">
+                        <Border Style="{StaticResource ButtonBorder}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="15" Height="15" Margin="5, 0" Source="../Resources/Images/Icons/repeat.png" />
+                                <Label Content="AGGIORNA" Margin="0, 0, 5, 0" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                    <Button Grid.Column="2" Margin="5, 0, 0, 0" Click="Button_Click">
+                        <Border Style="{StaticResource ButtonLightBorder}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="15" Height="15" Margin="5, 0" Source="../Resources/Images/Icons/close.png" />
+                                <Label Content="CHIUDI" Margin="0, 0, 5, 0" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                </Grid>
+
+                <Border Padding="20" Margin="10, 5, 10, 10" CornerRadius="10" BorderThickness="1" Background="#fff">
+                    <StackPanel>
+                        <Label Style="{StaticResource SectionTitle}" Content="Periodo" />
+                        <Grid Margin="0, 0, 0, 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="10, 0">
+                                <Label Content="Dal" />
+                                <DatePicker  SelectedDate="{Binding DateFrom}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="10, 0">
+                                <Label Content="Al" />
+                                <DatePicker SelectedDate="{Binding DateTo}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 0, 0, 5">
+                                <Button Command="{Binding ApplyFilterCommand}">
+                                    <Border Style="{StaticResource ButtonBorder}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="15" Height="15" Margin="5, 0" Source="../Resources/Images/Icons/repeat.png" />
+                                            <Label Content="AVVIA RICERCA" Margin="0, 0, 5, 0" />
+                                        </StackPanel>
+                                    </Border>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Padding="20" Margin="10, 0, 10, 10" CornerRadius="10" BorderThickness="1" Background="#fff">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lblWait" Grid.Column="0"  Content="Attendere, operazione in corso..." Visibility="Collapsed" />
+                        </Grid>
+
+                        <lvc:CartesianChart x:Name="chart" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Height="350">
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Totale tralicci" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Data" Labels="{Binding Labels}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>
+                    </StackPanel>
+                </Border>
+
+                <Border Padding="20" Margin="10, 0, 10, 10" CornerRadius="10" BorderThickness="1" Background="#fff">
+                    <StackPanel>
+                        <Label Style="{StaticResource SectionTitle}" Content="Dettagli analitici" />
+
+                        <DataGrid AutoGenerateColumns="False" Style="{StaticResource DataGridStyle1}" ItemsSource="{Binding DataSource}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn 
+                                    CellStyle="{StaticResource CellStyle1}" 
+                                    Header="DATA" 
+                                    IsReadOnly="True"
+                                    Binding="{Binding Data, StringFormat=dd-MM-yyyy}"
+                                />  
+                                <DataGridTextColumn 
+                                    CellStyle="{StaticResource CellStyle1}" 
+                                    Header="TOTALE TRALICCI" 
+                                    IsReadOnly="True"
+                                    Binding="{Binding TotaleTralicci}"
+                                />  
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

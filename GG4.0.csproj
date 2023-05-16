@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows8.0</TargetFramework>
+    <RootNamespace>GG40</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>8.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>Resources\Images\favicon.ico</ApplicationIcon>
+    <AssemblyVersion>2023.03.1</AssemblyVersion>
+	<CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+	<Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\icon.png" />
+    <None Remove="Resources\Images\Icons\add.png" />
+    <None Remove="Resources\Images\Icons\close.png" />
+    <None Remove="Resources\Images\Icons\multiply.png" />
+    <None Remove="Resources\Images\Icons\repeat.png" />
+    <None Remove="Resources\Images\Icons\success.png" />
+    <None Remove="Resources\Images\Icons\trash.png" />
+    <None Remove="Resources\Images\Icons\trash_light.png" />
+    <None Remove="Resources\Images\logo.png" />
+    <None Remove="Resources\Images\splash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Common" Version="112.3.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.Lolita.SqlServer" Version="6.0.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CefSharp">
+      <HintPath>..\..\..\Users\AT Technologies\.nuget\packages\cefsharp.common\112.3.0\lib\net452\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>..\..\..\Users\AT Technologies\.nuget\packages\cefsharp.common\112.3.0\lib\net452\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Wpf">
+      <HintPath>..\..\..\Users\AT Technologies\.nuget\packages\cefsharp.wpf\112.3.0\lib\net462\CefSharp.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\icon.png" />
+    <Resource Include="Resources\Images\Icons\add.png" />
+    <Resource Include="Resources\Images\Icons\close.png" />
+    <Resource Include="Resources\Images\Icons\repeat.png" />
+    <Resource Include="Resources\Images\Icons\success.png" />
+    <Resource Include="Resources\Images\Icons\trash.png" />
+    <Resource Include="Resources\Images\Icons\trash_light.png" />
+    <Resource Include="Resources\Images\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\splash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\StazioneSaldantePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

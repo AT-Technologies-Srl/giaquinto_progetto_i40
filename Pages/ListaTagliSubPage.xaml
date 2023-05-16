@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="GG40.Pages.ListaTagliSubPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GG40.Pages"
+             x:Name="listaTagliSubPage"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    
+    <Border Padding="20" Margin="10, 5, 10, 10" CornerRadius="10" BorderThickness="1" Background="#fff">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="lblWait" Content="Attendere, operazione in corso..." Visibility="Collapsed" />
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 0, 0, 5">                    
+                    <Button Margin="5, 0, 0, 0" Command="{Binding AddCommand}" IsEnabled="{Binding ActionsEnabled}" Visibility="{Binding ActionsVisibility}">
+                        <Border Style="{StaticResource ButtonBorder}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="15" Height="15" Margin="5, 0" Source="../Resources/Images/Icons/add.png" />
+                                <Label Content="AGGIUNGI" Margin="0, 0, 5, 0" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                    <Button Margin="5, 0, 0, 0" Command="{Binding DeleteCommand}" IsEnabled="{Binding ActionsEnabled}" Visibility="{Binding ActionsVisibility}">
+                        <Border Style="{StaticResource DangerButtonBorder}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="15" Height="15" Margin="5, 0" Source="../Resources/Images/Icons/trash_light.png" />
+                                <Label Content="ELIMINA" Foreground="#fff" Margin="0, 0, 5, 0" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            
+            <DataGrid AutoGenerateColumns="False" Style="{StaticResource DataGridStyle1}" ItemsSource="{Binding ListaTagli}">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn 
+                        Header="" 
+                        CellStyle="{StaticResource CellStyle1}"
+                        Binding="{Binding IsSelected}"
+                    />
+                    <DataGridTextColumn 
+                        CellStyle="{StaticResource CellStyle1}" 
+                        Header="DATA INSERIMENTO" 
+                        IsReadOnly="True"
+                        Binding="{Binding ProgrammaTaglio.DataInserimento, StringFormat=dd-MM-yyyy HH:mm}"
+                    />
+                    <DataGridTextColumn 
+                        CellStyle="{StaticResource CellStyle1}" 
+                        Header="DATA AVVIO" 
+                        IsReadOnly="True"
+                        Binding="{Binding ProgrammaTaglio.DataAvvio, StringFormat=dd-MM-yyyy HH:mm}"
+                    />
+                    <DataGridTextColumn 
+                        CellStyle="{StaticResource CellStyle1}" 
+                        Header="NOME PROGRAMMA"  
+                        IsReadOnly="True"    
+                        Binding="{Binding ProgrammaTaglio.NomeProgramma}"
+                    />
+                    <DataGridTextColumn 
+                        CellStyle="{StaticResource CellStyle1}" 
+                        Header="DESCRIZIONE"  
+                        IsReadOnly="True"    
+                        Binding="{Binding ProgrammaTaglio.Descrizione}"
+                    />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Padding="0" Visibility="{Binding OpenAttachmentVisibility}" Command="{Binding ElementName=listaTagliSubPage, Path=DataContext.OpenAttachmentCommand}" CommandParameter="{Binding .}">
+                                    <Border Style="{StaticResource ButtonBorder}" Padding="0" CornerRadius="5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="VISUALIZZA ALLEGATO" />
+                                        </StackPanel>
+                                    </Border>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMovedToMachine}" Value="False">
+                                <Setter Property="Background" Value="Red"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsMovedToMachine}" Value="True">
+                                <Setter Property="Background" Value="White"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </StackPanel>
+    </Border>
+
+</UserControl>

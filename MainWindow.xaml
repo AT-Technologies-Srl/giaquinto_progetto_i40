@@ -1,0 +1,41 @@
+﻿<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pages="clr-namespace:GG40.Pages"
+    x:Class="GG40.MainWindow"
+    Title="Giaquinto Costruzioni - Progetto Industria 4.0"
+    WindowState="Maximized"
+    Height="450" 
+    Width="800">
+    
+    <Window.Content>
+        <DockPanel Background="#eee">
+            <StackPanel DockPanel.Dock="Left" Width="325" Background="#bdc8be">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Margin="20">
+                        <Image.Source>
+                            <BitmapImage UriSource="Resources/Images/logo.png" />
+                        </Image.Source>
+                    </Image>
+
+                    <pages:MenuPage Grid.Row="1" />
+                </Grid>
+            </StackPanel>
+
+            <Border DockPanel.Dock="Bottom" Padding="10" Background="#fff">
+                <Label FontWeight="Bold" Content="Powered by AT Technologies" HorizontalContentAlignment="Center" />
+            </Border>
+
+            <DockPanel x:Name="dockPanel">
+                <DockPanel.Background>
+                    <ImageBrush ImageSource="Resources/Images/icon.png" Opacity="0.22" Stretch="None"/>
+                </DockPanel.Background>
+            </DockPanel>
+        </DockPanel>
+    </Window.Content>
+</Window>

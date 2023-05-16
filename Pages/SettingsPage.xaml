@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="GG40.Pages.SettingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:components="clr-namespace:GG40.Components"
+             xmlns:local="clr-namespace:GG40.Pages"
+             xmlns:data="clr-namespace:GG40.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel VerticalAlignment="Top">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" FontSize="20"  FontWeight="Bold" Content="Impostazioni generali" />
+                <Button Grid.Column="1" Click="Button_Click">
+                    <Border Style="{StaticResource ButtonLightBorder}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="15" Height="15" Margin="5, 0" Source="../Resources/Images/Icons/close.png" />
+                            <Label Content="CHIUDI" Margin="0, 0, 5, 0" />
+                        </StackPanel>
+                    </Border>
+                </Button>
+            </Grid>
+
+            <Border Padding="20" Margin="10" CornerRadius="10" BorderThickness="1" Background="#fff">
+                <StackPanel>
+                    <Label Style="{StaticResource SectionTitle}" Content="Configurazione PLASMATECH - P 5166" />
+                    <Grid Margin="0, 0, 0, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Indirizzo IP" />
+                        <TextBox Grid.Column="1" FontWeight="Bold" Text="{Binding Source={x:Static data:Configuration.Instance}, Path=PlasmaRedIndirizzoIp}" />
+                    </Grid>
+                    <Grid Margin="0, 0, 0, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Cartella log" />
+                        <TextBox Grid.Column="1" FontWeight="Bold" Text="{Binding Source={x:Static data:Configuration.Instance}, Path=PlasmaRedLogDir}" />
+                    </Grid>
+                    <Grid Margin="0, 0, 0, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Cartella programmi di lavoro" />
+                        <TextBox Grid.Column="1" FontWeight="Bold" Text="{Binding Source={x:Static data:Configuration.Instance}, Path=PlasmaRedNpgDir}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Padding="20" Margin="10" CornerRadius="10" BorderThickness="1" Background="#fff">
+                <StackPanel>
+                    <Label Style="{StaticResource SectionTitle}" Content="Database" />
+                    <Grid Margin="0, 0, 0, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Indirizzo del server" />
+                        <TextBox Grid.Column="1" FontWeight="Bold" Text="{Binding Source={x:Static data:Configuration.Instance}, Path=DataSourceServerAddress}" />
+                    </Grid>
+                    <Grid Margin="0, 0, 0, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Porta" />
+                        <TextBox Grid.Column="1" FontWeight="Bold" Text="{Binding Source={x:Static data:Configuration.Instance}, Path=DataSourceServerPort}" />
+                    </Grid>
+                    <Grid Margin="0, 0, 0, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Utente" />
+                        <TextBox Grid.Column="1" FontWeight="Bold" Text="{Binding Source={x:Static data:Configuration.Instance}, Path=DataSourceUser}" />
+                    </Grid>
+                    <Grid Margin="0, 0, 0, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Password" />
+                        <PasswordBox x:Name="dbPass"  Grid.Column="1" FontWeight="Bold" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1"  Command="{Binding SaveCommand}">
+                    <Border Style="{StaticResource ButtonBorder}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20" Height="20" Margin="5, 0" Source="../Resources/Images/Icons/success.png" />
+                            <Label Content="SALVA CONFIGURAZIONE" Margin="0, 0, 5, 0" />
+                        </StackPanel>
+                    </Border>
+                </Button>
+            </Grid>
+        </StackPanel>
+
+        <components:LoadingOverlay Visibility="Hidden" />
+    </Grid>
+</UserControl>
